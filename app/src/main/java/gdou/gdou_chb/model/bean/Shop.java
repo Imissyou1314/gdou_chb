@@ -41,14 +41,12 @@ public class Shop  implements Serializable{
 	 */
 	private int stopTime;
 
+	private String shopImg;
+
 	private String createdDate;
 
 	public Shop(String shopName) {
 		this.shopName = shopName;
-	}
-
-	public Shop() {
-
 	}
 
 	public long getId() {
@@ -123,6 +121,14 @@ public class Shop  implements Serializable{
 		this.startingPrice = startingPrice;
 	}
 
+	public String getShopImg() {
+		return shopImg;
+	}
+
+	public void setShopImg(String shopImg) {
+		this.shopImg = shopImg;
+	}
+
 	@Override
 	public String toString() {
 		return "Shop{" +
@@ -134,6 +140,7 @@ public class Shop  implements Serializable{
 				", shopName='" + shopName + '\'' +
 				", openTime=" + openTime +
 				", stopTime=" + stopTime +
+				", shopImg='" + shopImg + '\'' +
 				", createdDate='" + createdDate + '\'' +
 				'}';
 	}
