@@ -19,6 +19,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
 import gdou.gdou_chb.R;
 import gdou.gdou_chb.adapter.ShopAdapter;
 import gdou.gdou_chb.car.ShoppingCartActivity;
@@ -27,6 +28,7 @@ import gdou.gdou_chb.model.bean.Shop;
 import gdou.gdou_chb.util.GsonUtils;
 import gdou.gdou_chb.util.Java.BaseActivity;
 import gdou.gdou_chb.util.MVP.BaseFragment;
+
 
 /**
  * Created by Z1shiki on 2016/11/16.
@@ -114,8 +116,10 @@ public class HomeFragment extends BaseFragment implements HomeContract.ShopView 
            public void onItemClick(View view, int postion) {
                Shop shop = mDataList.get(postion);
                Intent intent = new Intent(getActivity(), ShoppingCartActivity.class);
-               if (null != shop)
+               if (null != shop) {
                    intent.putExtra("shopId", shop.getId());
+                   intent.putExtra("businessId", shop.getBusinessId());
+               }
                startActivity(intent);
            }
        });

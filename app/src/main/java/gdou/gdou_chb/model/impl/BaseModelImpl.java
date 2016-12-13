@@ -15,8 +15,8 @@ public class BaseModelImpl {
     /**
      * 公共接口号
      */
-    public static final String Service_URL = "http://172.16.13.28:9001/";
-//    public static final String Service_URL = "http://192.168.31.56:9001/";
+//    public static final String Service_URL = "http://172.16.13.28:9001/";
+    public static final String Service_URL = "http://192.168.31.56:9001/";
     /**
      * 用户
      * User_URL
@@ -56,6 +56,7 @@ public class BaseModelImpl {
     public static final String rebackOrders_URL = "orders/reback/";
     public static final String userAllOrders_URL = "orders/user/";
     public static final String ordersInfo_URL = "orders/ordersInfo/";
+    public static final String pay_Order_URL = "/orders/pay";
     /**
      * 评论
      * Comment_URL

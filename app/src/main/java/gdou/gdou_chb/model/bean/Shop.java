@@ -45,7 +45,17 @@ public class Shop  implements Serializable{
 
 	private String createdDate;
 
-	public Shop(String shopName) {
+    private long businessId;
+
+    public long getBusinessId() {
+        return businessId;
+    }
+
+    public void setBusinessId(long businessId) {
+        this.businessId = businessId;
+    }
+
+    public Shop(String shopName) {
 		this.shopName = shopName;
 	}
 
@@ -129,19 +139,20 @@ public class Shop  implements Serializable{
 		this.shopImg = shopImg;
 	}
 
-	@Override
-	public String toString() {
-		return "Shop{" +
-				"id=" + id +
-				", startingPrice=" + startingPrice +
-				", distributionFee=" + distributionFee +
-				", latitude=" + latitude +
-				", loongitude=" + loongitude +
-				", shopName='" + shopName + '\'' +
-				", openTime=" + openTime +
-				", stopTime=" + stopTime +
-				", shopImg='" + shopImg + '\'' +
-				", createdDate='" + createdDate + '\'' +
-				'}';
-	}
+    @Override
+    public String toString() {
+        return "Shop{" +
+                "id=" + id +
+                ", startingPrice=" + startingPrice +
+                ", distributionFee=" + distributionFee +
+                ", latitude=" + latitude +
+                ", loongitude=" + loongitude +
+                ", shopName='" + shopName + '\'' +
+                ", openTime=" + openTime +
+                ", stopTime=" + stopTime +
+                ", shopImg='" + shopImg + '\'' +
+                ", createdDate='" + createdDate + '\'' +
+                ", businessId=" + businessId +
+                '}';
+    }
 }

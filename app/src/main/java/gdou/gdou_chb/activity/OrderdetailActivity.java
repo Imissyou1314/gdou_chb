@@ -18,7 +18,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import gdou.gdou_chb.R;
 import gdou.gdou_chb.model.OrderModel;
-import gdou.gdou_chb.model.bean.Goods;
 import gdou.gdou_chb.model.bean.OrderDetail;
 import gdou.gdou_chb.model.bean.Orders;
 import gdou.gdou_chb.model.bean.ResultBean;
@@ -29,23 +28,26 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
-import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by WT on 2016/12/9.
  */
 
 public class OrderdetailActivity extends BaseActivity {
-    @BindView(R.id.order_num)
-    TextView orderNum;
-    @BindView(R.id.shop_name)
-    TextView shopName;
-    @BindView(R.id.order_details_goodslist)
-    RecyclerView rvorderDetails;
-    @BindView(R.id.total_price)
-    TextView totalPrice;
 
-    private CompositeSubscription mSubscription;
+    @BindView(R.id.order_detail_userName)
+    TextView userName;
+    @BindView(R.id.order_detail_address)
+    TextView userAddress;
+    @BindView(R.id.order_detail_phone)
+    TextView userPhone;
+    @BindView(R.id.order_detail_totle)
+    TextView totlePrice;
+    @BindView(R.id.order_detail_order_name)
+    TextView shopName;
+    @BindView(R.id.order_detail_goods)
+    RecyclerView goodsListView;
+
     private Orders orders;
     private OrderModel ordermodel;
     private List<OrderDetail> goodsList;
@@ -54,9 +56,8 @@ public class OrderdetailActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.order_details_act);
+        setContentView(R.layout.activity_order_detail);
         ButterKnife.bind(this);
-        mSubscription = new CompositeSubscription();
 
         initData();
 
@@ -64,16 +65,24 @@ public class OrderdetailActivity extends BaseActivity {
     }
 
     private void initView() {
-        rvorderDetails.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new CommonAdapter<OrderDetail>(this, R.layout.item_order_details, goodsList) {
+        goodsListView.setLayoutManager(new LinearLayoutManager(this));
+
+        userName.setText(userName.getText().toString() + orders.getName());
+        userAddress.setText(userAddress.getText().toString() + orders.getAddress());
+        userPhone.setText(userPhone.getText().toString() + orders.getPhone());
+        totlePrice.setText(totlePrice.getText().toString() + orders.getTotalPrice());
+        shopName.setText(shopName.getText().toString() + orders.getName());
+
+        mAdapter = new CommonAdapter<OrderDetail>(this, R.layout.item_order_detail, goodsList) {
             @Override
             protected void convert(ViewHolder holder, OrderDetail orderDetail, int position) {
-                holder.setText(R.id.good_name, orderDetail.getGoodName());
-                holder.setText(R.id.good_number, orderDetail.getNumber() + "");
-                holder.setText(R.id.good_price, orderDetail.getPrice() + "");
+                holder.setText(R.id.item_order_detail_goodname, orderDetail.getGoodName());
+                holder.setText(R.id.item_order_detail_price, "单价 :" + orderDetail.getPrice() + "");
+                holder.setText(R.id.item_order_detail_totle, "合计 :" + orderDetail.getTotalPrice() + "");
+                holder.setText(R.id.item_order_detail_number, "数量 :" + orderDetail.getNumber() + "");
             }
         };
-        rvorderDetails.setAdapter(mAdapter);
+        goodsListView.setAdapter(mAdapter);
 
     }
 
@@ -85,7 +94,7 @@ public class OrderdetailActivity extends BaseActivity {
 
         initViewData();
         ordermodel = new OrderModelImpl();
-        ordermodel.getOrderDetail(orders.getId())
+        ordermodel.getOrderDetail(Long.valueOf(orders.getId()))
                 .map(new Func1<Result, String>() {
                                                     @Override
                                                     public String call(Result result) {
@@ -123,15 +132,11 @@ public class OrderdetailActivity extends BaseActivity {
     }
 
     private void initViewData() {
-        orderNum.setText(orders.getName());
-        totalPrice.setText(orders.getTotalPrice() + "");
 
-//        adapter = new OrderDetailAdapter(this)
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mSubscription.clear();
     }
 }
