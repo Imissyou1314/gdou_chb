@@ -169,7 +169,7 @@ public class AddressFragment extends BaseFragment implements AddressContract.Vie
                                                                    "addressList", Address[].class);
                                                    mAddressList.addAll(addressList);
                                                    Log.d("数据量", "onNext: " + addressList.size());
-//                                                   addressAdapter.notifyDataSetChanged();
+                                                   addressAdapter.notifyDataSetChanged();
                                                }
                                            }
                                 );

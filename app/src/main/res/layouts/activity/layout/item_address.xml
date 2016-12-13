@@ -4,6 +4,7 @@
     android:background="@color/colorPrimaryDark"
     android:layout_marginBottom="10dp"
     android:paddingBottom="10dp"
+    android:padding="10dp"
     android:layout_height="wrap_content">
 
     <TextView
@@ -15,8 +16,7 @@
         android:textSize="18sp"
         android:layout_gravity="center"
         android:gravity="center|left"
-        android:typeface="sans"
-        android:textColor="@drawable/common_google_signin_btn_icon_dark" />
+        android:typeface="sans" />
 
     <TextView
         android:text="收货人姓名"
