@@ -59,7 +59,7 @@ public class OrderModelImpl implements OrderModel {
     public Observable<Result> getOrderDetail(Long orderId) {
         HttpParams params  = new HttpParams();
         params.put("ordersId", String.valueOf(orderId));
-        return  RxVolleyUtils.getInstance().post(
+        return  RxVolleyUtils.getInstance().get(
                 BaseModelImpl.Service_URL + BaseModelImpl.ordersInfo_URL + orderId
                 ,params);
     }

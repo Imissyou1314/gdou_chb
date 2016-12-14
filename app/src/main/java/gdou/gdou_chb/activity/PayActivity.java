@@ -176,10 +176,12 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
             tempOrders.setUserId(BaseModelImpl.user.getId());
         if (v.getId() == R.id.pay_no_onlie) {
             //货到付款
+            tempOrders.setPayType(2);
             placeOrders(tempOrders, goodsList);
             isPayView = true;
         } else {
             //在线支付
+            tempOrders.setPayType(1);
             placeOrders(tempOrders, goodsList);
             isPayView = false;
         }

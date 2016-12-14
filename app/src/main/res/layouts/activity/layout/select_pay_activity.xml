@@ -3,12 +3,18 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <ImageView
+        android:id="@+id/select_pay_zhifubao"
         android:layout_width="match_parent"
         android:layout_weight="1"
-        android:layout_height="wrap_content" />
+        android:padding="50dp"
+        android:src="@drawable/select_zhifubao_pay"
+        android:layout_height="match_parent" />
     <ImageView
+        android:id="@+id/select_pay_weixin"
+        android:padding="50dp"
         android:layout_width="match_parent"
         android:layout_weight="1"
-        android:layout_height="wrap_content" />
+        android:src="@drawable/select_wexi_pay"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

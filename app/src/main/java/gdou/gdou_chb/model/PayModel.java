@@ -25,5 +25,5 @@ public interface PayModel {
      * @param payWay 支付方式
      * @return
      */
-    Observable<Result> payOrder(Long ordersId, String payWay);
+    Observable<Result> payOrder(Integer ordersId, String payWay);
 }

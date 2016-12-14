@@ -9,18 +9,26 @@ import android.view.animation.AnimationSet;
 import android.view.animation.RotateAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
+import butterknife.BindView;
 import gdou.gdou_chb.R;
+import gdou.gdou_chb.model.bean.Comment;
+import gdou.gdou_chb.model.impl.BaseModelImpl;
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 
 
 public class GoodsAdapter extends BaseAdapter implements StickyListHeadersAdapter {
 
+    @BindView(R.id.img)
+    ImageView img;
     private ArrayList<GoodsItem> dataList;
     private ShoppingCartActivity mContext;
     private NumberFormat nf;
@@ -36,10 +44,10 @@ public class GoodsAdapter extends BaseAdapter implements StickyListHeadersAdapte
 
     @Override
     public View getHeaderView(int position, View convertView, ViewGroup parent) {
-        if(convertView==null) {
+        if (convertView == null) {
             convertView = mInflater.inflate(R.layout.item_header_view, parent, false);
         }
-        ((TextView)(convertView)).setText(dataList.get(position).typeName);
+        ((TextView) (convertView)).setText(dataList.get(position).typeName);
         return convertView;
     }
 
@@ -50,7 +58,7 @@ public class GoodsAdapter extends BaseAdapter implements StickyListHeadersAdapte
 
     @Override
     public int getCount() {
-        if(dataList==null){
+        if (dataList == null) {
             return 0;
         }
         return dataList.size();
@@ -69,11 +77,11 @@ public class GoodsAdapter extends BaseAdapter implements StickyListHeadersAdapte
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ItemViewHolder holder = null;
-        if(convertView==null){
-            convertView = mInflater.inflate(R.layout.item_goods,parent,false);
+        if (convertView == null) {
+            convertView = mInflater.inflate(R.layout.item_goods, parent, false);
             holder = new ItemViewHolder(convertView);
             convertView.setTag(holder);
-        }else{
+        } else {
             holder = (ItemViewHolder) convertView.getTag();
         }
         GoodsItem item = dataList.get(position);
@@ -81,8 +89,8 @@ public class GoodsAdapter extends BaseAdapter implements StickyListHeadersAdapte
         return convertView;
     }
 
-    class ItemViewHolder implements View.OnClickListener{
-        private TextView name,price,tvAdd,tvMinus,tvCount;
+    class ItemViewHolder implements View.OnClickListener {
+        private TextView name, price, tvAdd, tvMinus, tvCount;
         private GoodsItem item;
         private RatingBar ratingBar;
 
@@ -93,21 +101,25 @@ public class GoodsAdapter extends BaseAdapter implements StickyListHeadersAdapte
             tvMinus = (TextView) itemView.findViewById(R.id.tvMinus);
             tvAdd = (TextView) itemView.findViewById(R.id.tvAdd);
             ratingBar = (RatingBar) itemView.findViewById(R.id.ratingBar);
+            img = (ImageView) itemView.findViewById(R.id.img);
             tvMinus.setOnClickListener(this);
             tvAdd.setOnClickListener(this);
         }
 
-        public void bindData(GoodsItem item){
+        public void bindData(GoodsItem item) {
             this.item = item;
             name.setText(item.name);
             ratingBar.setRating(item.rating);
             item.count = mContext.getSelectedItemCountById(item.id);
             tvCount.setText(String.valueOf(item.count));
             price.setText(nf.format(item.price));
-            if(item.count<1){
+            Glide.with(mContext)
+                    .load(BaseModelImpl.Service_URL + BaseModelImpl.IMAGE_URL + item.mimg)
+                    .into(img);
+            if (item.count < 1) {
                 tvCount.setVisibility(View.GONE);
                 tvMinus.setVisibility(View.GONE);
-            }else{
+            } else {
                 tvCount.setVisibility(View.VISIBLE);
                 tvMinus.setVisibility(View.VISIBLE);
             }
@@ -116,7 +128,7 @@ public class GoodsAdapter extends BaseAdapter implements StickyListHeadersAdapte
         @Override
         public void onClick(View v) {
             ShoppingCartActivity activity = mContext;
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.tvAdd: {
                     int count = activity.getSelectedItemCountById(item.id);
                     if (count < 1) {
@@ -151,33 +163,33 @@ public class GoodsAdapter extends BaseAdapter implements StickyListHeadersAdapte
         }
     }
 
-    private Animation getShowAnimation(){
+    private Animation getShowAnimation() {
         AnimationSet set = new AnimationSet(true);
-        RotateAnimation rotate = new RotateAnimation(0,720,RotateAnimation.RELATIVE_TO_SELF,0.5f,RotateAnimation.RELATIVE_TO_SELF,0.5f);
+        RotateAnimation rotate = new RotateAnimation(0, 720, RotateAnimation.RELATIVE_TO_SELF, 0.5f, RotateAnimation.RELATIVE_TO_SELF, 0.5f);
         set.addAnimation(rotate);
         TranslateAnimation translate = new TranslateAnimation(
-                TranslateAnimation.RELATIVE_TO_SELF,2f
-                ,TranslateAnimation.RELATIVE_TO_SELF,0
-                ,TranslateAnimation.RELATIVE_TO_SELF,0
-                ,TranslateAnimation.RELATIVE_TO_SELF,0);
+                TranslateAnimation.RELATIVE_TO_SELF, 2f
+                , TranslateAnimation.RELATIVE_TO_SELF, 0
+                , TranslateAnimation.RELATIVE_TO_SELF, 0
+                , TranslateAnimation.RELATIVE_TO_SELF, 0);
         set.addAnimation(translate);
-        AlphaAnimation alpha = new AlphaAnimation(0,1);
+        AlphaAnimation alpha = new AlphaAnimation(0, 1);
         set.addAnimation(alpha);
         set.setDuration(500);
         return set;
     }
 
-    private Animation getHiddenAnimation(){
+    private Animation getHiddenAnimation() {
         AnimationSet set = new AnimationSet(true);
-        RotateAnimation rotate = new RotateAnimation(0,720,RotateAnimation.RELATIVE_TO_SELF,0.5f,RotateAnimation.RELATIVE_TO_SELF,0.5f);
+        RotateAnimation rotate = new RotateAnimation(0, 720, RotateAnimation.RELATIVE_TO_SELF, 0.5f, RotateAnimation.RELATIVE_TO_SELF, 0.5f);
         set.addAnimation(rotate);
         TranslateAnimation translate = new TranslateAnimation(
-                TranslateAnimation.RELATIVE_TO_SELF,0
-                ,TranslateAnimation.RELATIVE_TO_SELF,2f
-                ,TranslateAnimation.RELATIVE_TO_SELF,0
-                ,TranslateAnimation.RELATIVE_TO_SELF,0);
+                TranslateAnimation.RELATIVE_TO_SELF, 0
+                , TranslateAnimation.RELATIVE_TO_SELF, 2f
+                , TranslateAnimation.RELATIVE_TO_SELF, 0
+                , TranslateAnimation.RELATIVE_TO_SELF, 0);
         set.addAnimation(translate);
-        AlphaAnimation alpha = new AlphaAnimation(1,0);
+        AlphaAnimation alpha = new AlphaAnimation(1, 0);
         set.addAnimation(alpha);
         set.setDuration(500);
         return set;

@@ -137,7 +137,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
                         //转换
                         for (Goods goods : goodsList) {
 
-                            dataList.add(new GoodsItem((int) goods.getId(), goods.getPrice(),goods.getName(), 0, null));
+                            dataList.add(new GoodsItem((int) goods.getId(), goods.getPrice(),goods.getName(), 0, null, goods.getGoodImg()));
                         }
                         Log.d("Goods->List", GsonUtils.getJsonStr(goodsList));
                     }

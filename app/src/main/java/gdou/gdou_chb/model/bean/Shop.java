@@ -35,11 +35,11 @@ public class Shop  implements Serializable{
 	/**
 	 * 开店时间
 	 */
-	private int openTime;
+	private String openTime;
 	/**
 	 * 关店时间
 	 */
-	private int stopTime;
+	private String stopTime;
 
 	private String shopImg;
 
@@ -91,20 +91,20 @@ public class Shop  implements Serializable{
 		this.shopName = shopName;
 	}
 
-	public int getOpenTime() {
-		return openTime;
-	}
-
-	public void setOpenTime(int openTime) {
-		this.openTime = openTime;
-	}
-
-	public int getStopTime() {
+	public String getStopTime() {
 		return stopTime;
 	}
 
-	public void setStopTime(int stopTime) {
+	public void setStopTime(String stopTime) {
 		this.stopTime = stopTime;
+	}
+
+	public String getOpenTime() {
+		return openTime;
+	}
+
+	public void setOpenTime(String openTime) {
+		this.openTime = openTime;
 	}
 
 	public String getCreatedDate() {

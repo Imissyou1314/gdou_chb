@@ -120,11 +120,13 @@ public class OrderdetailActivity extends BaseActivity {
                                                                    Log.d("OrderdetailActivity","result:" + string);
                                                                    ResultBean resultBean = GsonUtils.getResultBeanByJson(string);
                                                                    //解析成对应的对象
-                                                                   List<OrderDetail> orderDetaList = GsonUtils
-                                                                           .getBeanFromResultBeanListMiss(resultBean,"orderDetailList",
-                                                                                   OrderDetail[].class);
-                                                                   goodsList.addAll(orderDetaList);
-                                                                   mAdapter.notifyDataSetChanged();
+                                                                   if (resultBean.isServiceResult()) {
+                                                                       List<OrderDetail> orderDetaList = GsonUtils
+                                                                               .getBeanFromResultBeanListMiss(resultBean, "orderDetailList",
+                                                                                       OrderDetail[].class);
+                                                                       goodsList.addAll(orderDetaList);
+                                                                       mAdapter.notifyDataSetChanged();
+                                                                   }
                                                                }
                                                            }
                                                 );

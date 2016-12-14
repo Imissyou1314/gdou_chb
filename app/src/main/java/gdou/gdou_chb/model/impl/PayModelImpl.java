@@ -1,6 +1,5 @@
 package gdou.gdou_chb.model.impl;
 
-import com.kymjs.rxvolley.RxVolley;
 import com.kymjs.rxvolley.client.HttpParams;
 import com.kymjs.rxvolley.rx.Result;
 
@@ -21,6 +20,7 @@ public class PayModelImpl implements PayModel {
         params.put("addressId", orders.getAddressId());
         params.put("totalPrice", orders.getTotalPrice() + "");
         params.put("userId", orders.getUserId() + "");
+        params.put("payTpye", orders.getPayType() + "");
         params.put("shopUserId", orders.getShopUserId() + "");
         return RxVolleyUtils
                 .getInstance()
@@ -28,7 +28,7 @@ public class PayModelImpl implements PayModel {
     }
 
     @Override
-    public Observable<Result> payOrder(Long ordersId, String payWay) {
+    public Observable<Result> payOrder(Integer ordersId, String payWay) {
         HttpParams params = new HttpParams();
         params.put("ordersId", ordersId + "");
         params.put("payWay", payWay);

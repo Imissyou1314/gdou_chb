@@ -8,6 +8,7 @@ import gdou.gdou_chb.model.bean.User;
 
 public class BaseModelImpl {
 
+    public static final String IMAGE_URL = "imageware/";
     /**
      * 保存用户对象
      */
