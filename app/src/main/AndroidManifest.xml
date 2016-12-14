@@ -49,6 +49,7 @@
         <activity android:name=".activity.OrderdetailActivity" />
         <activity android:name=".activity.AddAddressActivity" />
         <activity android:name=".activity.PayActivity"/>
+        <!--<activity android:name=""-->
 
         <service android:name="com.amap.api.location.APSService" />
         <!--

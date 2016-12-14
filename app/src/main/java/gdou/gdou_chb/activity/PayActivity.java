@@ -219,7 +219,9 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
                                    ResultBean resultBean = GsonUtils.getResultBeanByJson(string);
                                    //进行数据处理
                                    if (resultBean.isServiceResult()) {
-                                       mOrdersId = Integer.parseInt(resultBean.getResultParm().get("ordersId").toString());
+                                       String tempOrderId = resultBean.getResultParm().get("ordersId").toString();
+                                       tempOrderId = tempOrderId.substring(0, tempOrderId.indexOf("."));
+                                       mOrdersId = Integer.parseInt(tempOrderId);
                                    } else {
                                        isPayView = false;
                                    }

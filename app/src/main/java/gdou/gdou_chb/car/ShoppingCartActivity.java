@@ -41,7 +41,6 @@ import gdou.gdou_chb.model.bean.Orders;
 import gdou.gdou_chb.model.bean.ResultBean;
 import gdou.gdou_chb.model.impl.BaseModelImpl;
 import gdou.gdou_chb.model.impl.GoodModelImpl;
-import gdou.gdou_chb.model.impl.OrderModelImpl;
 import gdou.gdou_chb.util.GsonUtils;
 import rx.Subscriber;
 import rx.Subscription;
@@ -51,7 +50,6 @@ import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
-import static gdou.gdou_chb.R.id.count;
 
 public class ShoppingCartActivity extends AppCompatActivity implements View.OnClickListener {
 
